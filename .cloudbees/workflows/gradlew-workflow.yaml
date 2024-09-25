@@ -1,0 +1,19 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: gradlew workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    steps:
+      - uses: cloudbees-io/checkout@v1
+        name: checkout
+      - uses: docker://maven:3-eclipse-temurin-17
+        name: Build1
+        kind: build
+        run: gradlew build
+        shell: sh
